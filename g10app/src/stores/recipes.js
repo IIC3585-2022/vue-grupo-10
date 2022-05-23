@@ -18,9 +18,9 @@ export const useUserStore = defineStore("recipe", {
     actions: {
       async fetchRecipes() {
         try {
-          const data = await searchRequest()
-          this.recipes = data.data
-          //this.recipes = searchByIngredientDummy
+          //const data = await searchRequest()
+          this.recipes = searchByIngredientDummy
+          //this.recipes = data.data
 
           console.log(this.recipes)
           }
