@@ -1,16 +1,25 @@
 <script>
+import { searchIngredients } from "@/api/index.js";
 export default {
   data() {
     return {
-      ingredients: [],
+      inputIngredients: [],
+      realIngredients: [],
     };
   },
   methods: {
     addIngredient() {
-      this.ingredients.push("");
+      this.inputIngredients.push("");
     },
     changeIngredient(index, event) {
-      this.ingredients[index] = event.target.value;
+      this.inputIngredients[index] = event.target.value;
+    },
+    onSubmit() {
+      this.inputIngredients.map((ingredient) => {
+        searchIngredients(ingredient).then((res) => {
+          if (res.data.length) this.realIngredients.push(res.data[0].name);
+        });
+      });
     },
   },
 };
@@ -18,19 +27,19 @@ export default {
 
 <template>
   <div class="container">
-    <h1>Ingresa tus ingredientes</h1>
-    <button class="button" type="button" @click="addIngredient">
+    <h1 class="title">Ingresa tus ingredientes</h1>
+    <button class="button is-primary" type="button" @click="addIngredient">
       Agregar +
     </button>
     <form @submit.prevent="onSubmit">
       <div
         class="input-container"
-        v-for="(_, index) in ingredients"
+        v-for="(_, index) in inputIngredients"
         v-bind:key="index"
       >
         <input
           class="input"
-          v-model="ingredients[index]"
+          v-model="inputIngredients[index]"
           type="text"
           placeholder="onion"
           @change="(event) => changeIngredient(index, event)"
@@ -39,12 +48,12 @@ export default {
         <button
           type="button"
           class="button is-danger"
-          @click="ingredients.splice(index, 1)"
+          @click="inputIngredients.splice(index, 1)"
         >
           -
         </button>
       </div>
-      <button class="button is-primary" v-if="ingredients.length">
+      <button class="button is-success" v-if="inputIngredients.length">
         Buscar Receta
       </button>
     </form>

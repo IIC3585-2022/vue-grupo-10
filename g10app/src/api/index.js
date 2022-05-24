@@ -34,11 +34,11 @@ export const searchRequest = async () =>
     return response;
   });
 
-export const searchIngredients = async (ingredients) =>
+export const searchIngredients = async (ingredient) =>
   axios({
     method: "GET",
     url: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
-    params: { query: ingredients, number: "10" },
+    params: { query: ingredient, number: "10" },
     headers: {
       "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
       "X-RapidAPI-Key": "5f8da93941msh5552c3429ba2fc8p1eefc0jsn7a633979cbd5",
