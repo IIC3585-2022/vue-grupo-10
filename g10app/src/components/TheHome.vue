@@ -15,9 +15,13 @@ export default {
       this.inputIngredients[index] = event.target.value;
     },
     onSubmit() {
+      const ingredientsPromises = [];
       this.inputIngredients.map((ingredient) => {
-        searchIngredients(ingredient).then((res) => {
-          if (res.data.length) this.realIngredients.push(res.data[0].name);
+        ingredientsPromises.push(searchIngredients(ingredient));
+        Promise.all(ingredientsPromises).then((values) => {
+          this.realIngredients = values
+            .filter((elem) => elem.data.length)
+            .map((elem) => elem.data[0].name);
         });
       });
     },
