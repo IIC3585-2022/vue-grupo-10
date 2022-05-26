@@ -2,11 +2,14 @@
 //import { RouterLink, RouterView } from "vue-router";
 //import HelloWorld from "@/components/HelloWorld.vue";
 import TheHome from "@/components/TheHome.vue";
+
 </script>
 
 <template>
   <div class="box container">
     <TheHome />
+
+    <br/><br/><br/><br/><br/>
     <!-- <HelloWorld msg="You did it!" />
 
     <nav>
