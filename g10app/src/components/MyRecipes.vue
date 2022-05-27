@@ -25,9 +25,9 @@ import { ref, onMounted } from 'vue';
 import RecipeCard from "./RecipeCard.vue" 
 
 //import users store
-import { useUserStore } from "../stores/recipes";
+import { useRecipeStore } from "../stores/recipes";
 // declare store variable
-const store = useUserStore();
+const store = useRecipeStore();
 
 /*
 const recipes = computed(() => {

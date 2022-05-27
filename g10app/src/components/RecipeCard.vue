@@ -1,7 +1,7 @@
 <script setup>
-import { useUserStore } from "../stores/recipes";
+import { useRecipeStore } from "../stores/recipes";
 
-const store = useUserStore();
+const store = useRecipeStore();
 
 defineProps({
   recipe: {

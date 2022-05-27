@@ -1,12 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import TheHome from "@/components/TheHome.vue";
 import Navbar from "./views/Navbar.vue";
-
+import ReloadPWA from "./pwa/ReloadPWA.vue";
 
 </script>
 
 <template>
+  <ReloadPWA />
   <div class="box container">
     <Navbar/>
   </div>

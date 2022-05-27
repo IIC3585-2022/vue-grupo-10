@@ -6,7 +6,7 @@ import { searchByIngredientDummy } from '../dummies'
 // Import axios to make HTTP requests
 //import axios from "axios"
 
-export const useUserStore = defineStore("recipe", {
+export const useRecipeStore = defineStore("recipe", {
     state: () => ({
         recipes: [],
         inputIngredients: [],

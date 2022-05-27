@@ -1,10 +1,10 @@
 <script setup>
 import { searchIngredients } from "@/api/index.js";
 import { searchByIngredientDummy } from "@/dummies";
-import { useUserStore } from "../stores/recipes";
+import { useRecipeStore } from "../stores/recipes";
 import RecipeCard from "./RecipeCard.vue" 
 
-const store = useUserStore();
+const store = useRecipeStore();
 
 function onSubmit() {
   store.fetchRecipes();
