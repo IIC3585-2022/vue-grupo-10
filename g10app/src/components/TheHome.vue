@@ -2,7 +2,7 @@
 import { searchIngredients } from "@/api/index.js";
 import { searchByIngredientDummy } from "@/dummies";
 import { useUserStore } from "../stores/recipes";
-import { RecipeCard } from "./RecipeCard" 
+import RecipeCard from "./RecipeCard.vue" 
 
 const store = useUserStore();
 
@@ -64,7 +64,10 @@ function onSubmit() {
       v-if ="store.getRecipes"
       v-for='gettersRecipe in store.getRecipes' 
       :key='gettersRecipe.id'>
-      <RecipeCard :recipe="gettersRecipe"></RecipeCard>
+      <RecipeCard 
+        :recipe="gettersRecipe" 
+        :inFavorites="false"
+      />
       
       </div>
   </div>

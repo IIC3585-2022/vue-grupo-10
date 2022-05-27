@@ -11,6 +11,7 @@ export const useUserStore = defineStore("recipe", {
         recipes: [],
         inputIngredients: [],
         realIngredients: [],
+        myFavorites:new Set(),
     }),
     getters: {
       getRecipes(state){
@@ -18,7 +19,12 @@ export const useUserStore = defineStore("recipe", {
         }
     },
     actions: {
-      
+      addToFavorites(item){
+        this.myFavorites.add(item)
+      },
+      removeFromFavorites(toRemove){
+        this.myFavorites.delete(toRemove)
+      },
       addIngredient() {
         this.inputIngredients.push("");
       },

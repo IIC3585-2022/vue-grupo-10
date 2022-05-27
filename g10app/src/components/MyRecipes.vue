@@ -1,49 +1,40 @@
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a target="_blank" href="https://vitejs.dev/">ACA IRAN LAS RECETAS</a> +
-      <a target="_blank" href="https://vuejs.org/">Vue 3</a>.
-    </h3>
+    <h1 class="green">Mis Recetas</h1>
   </div>
-  <div>
-      <h1>Made By Getters</h1>
+  <div 
+    v-if='store.myFavorites'>
     <div 
-      v-if ="store.getRecipes"
-      v-for='gettersRecipe in store.getRecipes' 
+      v-if ="store.myFavorites"
+      v-for='gettersRecipe in store.myFavorites' 
       :key='gettersRecipe.id'>
-      {{gettersRecipe.id}} {{gettersRecipe.title}} 
+      <RecipeCard 
+        :recipe="gettersRecipe" 
+        :inFavorites="true"
+        >
+      </RecipeCard>
+      
       </div>
-    
   </div>
 </template>
 
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import RecipeCard from "./RecipeCard.vue" 
+
 //import users store
 import { useUserStore } from "../stores/recipes";
 // declare store variable
 const store = useUserStore();
 
-//const msg = ref("Welcome to my Vuex Store");
-
-
-onMounted(() => {
-  store.fetchRecipes();
-})
-
-
 /*
 const recipes = computed(() => {
   return store.recipes
 })
-
-
-
 */
+
 defineProps({
   msg: {
     type: String,
