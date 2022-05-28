@@ -16,12 +16,12 @@ export const searchByIngredient = () =>
     },
   });
 
-export const searchRequest = async () =>
+export const searchRequest = async (items) =>
   axios({
     method: "GET",
     url: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients",
     params: {
-      ingredients: "apples,flour,sugar",
+      ingredients: items,
       ranking: "1",
       ignorePantry: "true",
       number: "5",
@@ -33,6 +33,7 @@ export const searchRequest = async () =>
   }).then((response) => {
     return response;
   });
+
 
 export const searchIngredients = async (ingredient) =>
   axios({

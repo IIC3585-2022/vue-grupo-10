@@ -20,7 +20,7 @@ defineProps({
   <div class="item">
       <h3>{{recipe.id}} {{recipe.title}}</h3>
       <img :src="recipe.image">
-      <div v-if="(inFavorites || store.myFavorites.has(recipe))">
+      <div v-if="(inFavorites || store.myFavorites.has(recipe) || store.getIdMyFavorites.includes(recipe.id) )">
         <button
           @click="store.removeFromFavorites(recipe)"
           >

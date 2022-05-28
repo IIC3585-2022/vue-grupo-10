@@ -6,7 +6,7 @@
   <div 
     v-if='store.myFavorites'>
     <div 
-      v-if ="store.myFavorites"
+      v-if='store.getRecipes'
       v-for='gettersRecipe in store.myFavorites' 
       :key='gettersRecipe.id'>
       <RecipeCard 

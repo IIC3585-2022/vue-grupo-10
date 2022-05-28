@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia'
 import { searchByIngredient, searchRequest } from '../api'
 import { searchByIngredientDummy } from '../dummies'
+import { useStorage } from '@vueuse/core'
 
 // Import axios to make HTTP requests
 //import axios from "axios"
@@ -9,21 +10,34 @@ import { searchByIngredientDummy } from '../dummies'
 export const useUserStore = defineStore("recipe", {
     state: () => ({
         recipes: [],
-        inputIngredients: [],
-        realIngredients: [],
-        myFavorites:new Set(),
+        inputIngredients: useStorage('inputIngredients', []),
+        realIngredients: useStorage('realIngredients', []),
+        myFavorites: useStorage('myFavorites', new Set()),
     }),
     getters: {
       getRecipes(state){
           return state.recipes
+        },
+
+      getIdMyFavorites(state){
+        let listOfSet =  [...state.myFavorites]
+        let listofIds = []
+        if (state.myFavorites){
+          listOfSet.forEach(item => {
+            listofIds.push(item.id)
+          })
         }
+        return listofIds
+      }
     },
     actions: {
       addToFavorites(item){
         this.myFavorites.add(item)
       },
       removeFromFavorites(toRemove){
-        this.myFavorites.delete(toRemove)
+        const obj = [...this.myFavorites].find(obj => obj.id === toRemove.id);
+
+        this.myFavorites.delete(obj)
       },
       addIngredient() {
         this.inputIngredients.push("");
@@ -33,9 +47,10 @@ export const useUserStore = defineStore("recipe", {
       },
       async fetchRecipes() {
         try {
-          //const data = await searchRequest()
-          this.recipes = searchByIngredientDummy
-          //this.recipes = data.data
+          const itemStr = this.inputIngredients.toString()
+          const data = await searchRequest(itemStr)
+          this.recipes = data.data
+          //this.recipes = searchByIngredientDummy
 
           console.log(this.recipes)
           console.log("fetched")
