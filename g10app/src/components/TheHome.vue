@@ -61,7 +61,7 @@ function onSubmit() {
   <div 
     v-if='store.getRecipes'>
     <div 
-      v-if ="store.getRecipes"
+      v-if='store.getRecipes'
       v-for='gettersRecipe in store.getRecipes' 
       :key='gettersRecipe.id'>
       <RecipeCard 
