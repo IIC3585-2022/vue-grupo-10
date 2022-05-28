@@ -9,6 +9,9 @@ import { searchByIngredientDummy } from '../dummies'
 export const useUserStore = defineStore("recipe", {
     state: () => ({
         recipes: [],
+        inputIngredients: [],
+        realIngredients: [],
+        myFavorites:new Set(),
     }),
     getters: {
       getRecipes(state){
@@ -16,6 +19,18 @@ export const useUserStore = defineStore("recipe", {
         }
     },
     actions: {
+      addToFavorites(item){
+        this.myFavorites.add(item)
+      },
+      removeFromFavorites(toRemove){
+        this.myFavorites.delete(toRemove)
+      },
+      addIngredient() {
+        this.inputIngredients.push("");
+      },
+      changeIngredient(index, event) {
+        this.inputIngredients[index] = event.target.value;
+      },
       async fetchRecipes() {
         try {
           //const data = await searchRequest()
@@ -23,6 +38,7 @@ export const useUserStore = defineStore("recipe", {
           //this.recipes = data.data
 
           console.log(this.recipes)
+          console.log("fetched")
           }
           catch (error) {
             alert(error)
