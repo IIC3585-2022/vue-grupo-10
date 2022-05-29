@@ -25,8 +25,14 @@ const recipe = store.getCurrentRecipe;
 <style>
 .container {
   text-align: center;
+  width: 70%;
 }
 .image {
   margin-bottom: 2em;
+}
+img {
+  width: 311px !important;
+  height: 231px !important;
+  margin: auto;
 }
 </style>
