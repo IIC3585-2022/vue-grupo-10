@@ -26,12 +26,15 @@ const handleClick = (recipe) => {
 </script>
 
 <template>
-  <div class="columns is-clickable" @click="() => handleClick(recipe)">
+  <div class="columns">
     <div class="column">
       <div class="card">
         <div class="columns is-vcentered">
           <div class="column">
-            <figure class="image is-128x128">
+            <figure
+              class="image is-128x128 is-clickable"
+              @click="() => handleClick(recipe)"
+            >
               <img class="is-rounded image is-128x128" :src="recipe.image" />
             </figure>
           </div>
@@ -41,28 +44,24 @@ const handleClick = (recipe) => {
           </div>
 
           <div class="column">
-            <div
+            <button
+              class="button is-danger"
+              @click="store.removeFromFavorites(recipe)"
               v-if="
                 inFavorites ||
                 store.myFavorites.has(recipe) ||
                 store.getIdMyFavorites.includes(recipe.id)
               "
             >
-              <button
-                class="button is-danger"
-                @click="store.removeFromFavorites(recipe)"
-              >
-                Eliminar receta de favoritos
-              </button>
-            </div>
-            <div v-else>
-              <button
-                class="button is-danger"
-                @click="store.addToFavorites(recipe)"
-              >
-                Añadir receta a favoritos
-              </button>
-            </div>
+              Eliminar receta de favoritos
+            </button>
+            <button
+              class="button is-success"
+              @click="store.addToFavorites(recipe)"
+              v-else
+            >
+              Añadir receta a favoritos
+            </button>
           </div>
         </div>
       </div>
