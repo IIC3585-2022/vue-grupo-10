@@ -54,11 +54,11 @@ export const useUserStore = defineStore("recipe", {
         this.recipes = data.data;
         //this.recipes = searchByIngredientDummy
 
-        console.log(this.recipes);
-        console.log("fetched");
+        //console.log(this.recipes);
+        //console.log("fetched");
       } catch (error) {
         alert(error);
-        console.log(error);
+        //console.log(error);
       }
     },
     setRecipe(recipe) {

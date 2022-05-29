@@ -1,28 +1,14 @@
-
 <template>
-  <div class="greetings">
+  <div class="greetings" v-if="store.getRecipes">
     <h1 class="green">Mis Recetas</h1>
-  </div>
-  <div 
-    v-if='store.myFavorites'>
-    <div 
-      v-if='store.getRecipes'
-      v-for='gettersRecipe in store.myFavorites' 
-      :key='gettersRecipe.id'>
-      <RecipeCard 
-        :recipe="gettersRecipe" 
-        :inFavorites="true"
-        >
-      </RecipeCard>
-      
-      </div>
+    <div v-for="gettersRecipe in store.myFavorites" :key="gettersRecipe.id">
+      <RecipeCard :recipe="gettersRecipe" :inFavorites="true"> </RecipeCard>
+    </div>
   </div>
 </template>
 
-
 <script setup>
-import { ref, onMounted } from 'vue';
-import RecipeCard from "./RecipeCard.vue" 
+import RecipeCard from "./RecipeCard.vue";
 
 //import users store
 import { useUserStore } from "../stores/recipes";

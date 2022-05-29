@@ -11,14 +11,14 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
-    { 
-      path:'/recipes', 
-      name:'recipes',
+    {
+      path: "/recipes",
+      name: "recipes",
       component: RecipesView,
     },
-    { 
-      path:'/detail', 
-      name:'detail',
+    {
+      path: "/detail",
+      name: "detail",
       component: RecipeDetail,
     },
   ],

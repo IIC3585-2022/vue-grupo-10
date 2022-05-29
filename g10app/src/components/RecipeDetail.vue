@@ -2,7 +2,6 @@
 import { useUserStore } from "../stores/recipes";
 const store = useUserStore();
 const recipe = store.getCurrentRecipe;
-console.log(recipe)
 </script>
 
 <template>

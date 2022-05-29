@@ -1,6 +1,5 @@
 <script setup>
-import { searchIngredients } from "@/api/index.js";
-import { searchByIngredientDummy } from "@/dummies";
+//import { searchByIngredientDummy } from "@/dummies";
 import { useUserStore } from "../stores/recipes";
 import RecipeCard from "./RecipeCard.vue";
 
@@ -8,17 +7,6 @@ const store = useUserStore();
 
 function onSubmit() {
   store.fetchRecipes();
-
-  /*
-  const ingredientsPromises = [];
-  this.inputIngredients.map((ingredient) => {
-    ingredientsPromises.push(searchIngredients(ingredient));
-    Promise.all(ingredientsPromises).then((values) => {
-      this.realIngredients = values
-        .map((elem) => elem.data.name);
-    });
-  });
-  */
 }
 </script>
 
@@ -64,19 +52,9 @@ function onSubmit() {
       </div>
     </form>
   </div>
-
-  <!-- <div v-if="store.getRecipes">
-    <div
-      v-if="store.getRecipes"
-      v-for="gettersRecipe in store.getRecipes"
-      :key="gettersRecipe.id"
-    >
-      <RecipeCard :recipe="gettersRecipe" :inFavorites="false" />
-    </div>
-  </div> -->
   <div class="container is-fluid cards">
     <RecipeCard
-      v-for="gettersRecipe in searchByIngredientDummy"
+      v-for="gettersRecipe in store.getRecipes"
       :key="gettersRecipe.id"
       :recipe="gettersRecipe"
       :inFavorites="false"
