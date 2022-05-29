@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from "../stores/recipes";
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
 const store = useUserStore();
 const router = useRouter();
@@ -18,7 +18,7 @@ defineProps({
 
 const handleClick = (recipe) => {
   store.setRecipe(recipe);
-  console.log(recipe)
+  console.log(recipe);
   router.push({
     name: "detail",
   });
@@ -26,40 +26,55 @@ const handleClick = (recipe) => {
 </script>
 
 <template>
-  <div class="card is-flex-direction-column is-align-items-center">
-    <header class="card-header">
-      <p class="card-header-title is-centered">{{ recipe.title }}</p>
-    </header>
-    <div class="card-image is-clickable" @click="() => handleClick(recipe)">
-      <figure class="image">
-        <img :src="recipe.image" />
-      </figure>
+  <div class="columns is-clickable" @click="() => handleClick(recipe)">
+    <div class="column">
+      <div class="card">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <figure class="image is-128x128">
+              <img class="is-rounded image is-128x128" :src="recipe.image" />
+            </figure>
+          </div>
+
+          <div class="column">
+            <h3 class="title is-5">{{ recipe.title }}</h3>
+          </div>
+
+          <div class="column">
+            <div
+              v-if="
+                inFavorites ||
+                store.myFavorites.has(recipe) ||
+                store.getIdMyFavorites.includes(recipe.id)
+              "
+            >
+              <button
+                class="button is-danger"
+                @click="store.removeFromFavorites(recipe)"
+              >
+                Eliminar receta de favoritos
+              </button>
+            </div>
+            <div v-else>
+              <button
+                class="button is-danger"
+                @click="store.addToFavorites(recipe)"
+              >
+                Añadir receta a favoritos
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <footer class="card-footer">
-      <button
-        v-if="
-          inFavorites ||
-          store.myFavorites.has(recipe) ||
-          store.getIdMyFavorites.includes(recipe.id)
-        "
-        @click="store.removeFromFavorites(recipe)"
-        class="button is-warning card-footer-item"
-      >
-        Eliminar receta de favoritos
-      </button>
-      <button
-        v-else
-        @click="store.addToFavorites(recipe)"
-        class="button is-primary card-footer-item"
-      >
-        Añadir receta a favoritos
-      </button>
-    </footer>
   </div>
 </template>
 
 <style>
 .card {
   margin-bottom: 2em;
+}
+.columns {
+  margin-top: 2em;
 }
 </style>
