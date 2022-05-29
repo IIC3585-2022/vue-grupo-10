@@ -17,24 +17,45 @@ defineProps({
 </script>
 
 <template>
-  <div class="item">
-      <h3>{{recipe.id}} {{recipe.title}}</h3>
-      <img :src="recipe.image">
+<div class="columns">
+  <div class="column">
+      <div class="card">
+
+
+<div class="columns is-vcentered">
+  <div class="column">
+    <figure class="image is-128x128">
+      <img class="is-rounded image is-128x128" :src="recipe.image"> 
+    </figure>
+   
+  </div>
+
+  <div class="column ">
+  <h3 class="title is-5"> {{recipe.title}}</h3>  
+  </div>
+
+
+    <div class="column">
       <div v-if="(inFavorites || store.myFavorites.has(recipe) || store.getIdMyFavorites.includes(recipe.id) )">
-        <button
+
+        <button class="button is-danger"
           @click="store.removeFromFavorites(recipe)"
           >
           Eliminar receta de favoritos
         </button>
       </div>
       <div v-else>
-        <button
+        <button class="button is-danger"
           @click="store.addToFavorites(recipe)"
-          >
-          Añadir receta a favoritos</button>
-      </div>
-      
+          > Añadir receta a favoritos</button>
+      </div>  
+    </div>
+</div>
+
   </div>
+  </div>
+</div>
+
 </template>
 
 <style>
