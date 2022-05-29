@@ -2,7 +2,7 @@
 import { searchIngredients } from "@/api/index.js";
 import { searchByIngredientDummy } from "@/dummies";
 import { useUserStore } from "../stores/recipes";
-import RecipeCard from "./RecipeCard.vue" 
+import RecipeCard from "./RecipeCard.vue";
 
 const store = useUserStore();
 
@@ -25,7 +25,11 @@ function onSubmit() {
 <template>
   <div class="container">
     <h1 class="title">Ingresa tus ingredientes</h1>
-    <button class="button is-primary" type="button" @click="store.addIngredient">
+    <button
+      class="button is-primary"
+      type="button"
+      @click="store.addIngredient"
+    >
       Agregar Ingredientes +
     </button>
     <form @submit.prevent="onSubmit">
@@ -51,25 +55,32 @@ function onSubmit() {
         </button>
       </div>
       <div class="input-container horizontal">
-        <button class="divisor button is-success" v-if="store.inputIngredients.length">
+        <button
+          class="divisor button is-success"
+          v-if="store.inputIngredients.length"
+        >
           Buscar Receta
         </button>
       </div>
     </form>
   </div>
 
-  <div 
-    v-if='store.getRecipes'>
-    <div 
-      v-if='store.getRecipes'
-      v-for='gettersRecipe in store.getRecipes' 
-      :key='gettersRecipe.id'>
-      <RecipeCard 
-        :recipe="gettersRecipe" 
-        :inFavorites="false"
-      />
-      
-      </div>
+  <!-- <div v-if="store.getRecipes">
+    <div
+      v-if="store.getRecipes"
+      v-for="gettersRecipe in store.getRecipes"
+      :key="gettersRecipe.id"
+    >
+      <RecipeCard :recipe="gettersRecipe" :inFavorites="false" />
+    </div>
+  </div> -->
+  <div class="container is-fluid cards">
+    <RecipeCard
+      v-for="gettersRecipe in searchByIngredientDummy"
+      :key="gettersRecipe.id"
+      :recipe="gettersRecipe"
+      :inFavorites="false"
+    />
   </div>
 </template>
 
@@ -79,8 +90,14 @@ function onSubmit() {
   justify-content: center;
   margin: 5px;
 }
-.horizontal{
+.horizontal {
   flex-direction: row;
   justify-content: center;
+}
+.cards {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
