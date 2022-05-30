@@ -26,7 +26,7 @@ const handleClick = (recipe) => {
 </script>
 
 <template>
-  <div class="columns">
+  <div class="columns recipeCard">
     <div class="column">
       <div class="card">
         <div class="columns is-vcentered">
@@ -56,7 +56,7 @@ const handleClick = (recipe) => {
               Eliminar receta de favoritos
             </button>
             <button
-              class="button is-success"
+              class="button is-success addFav"
               @click="store.addToFavorites(recipe)"
               v-else
             >
@@ -70,10 +70,17 @@ const handleClick = (recipe) => {
 </template>
 
 <style>
+.recipeCard {
+  width: 70%;
+}
 .card {
+  padding: 2em;
   margin-bottom: 2em;
 }
 .columns {
   margin-top: 2em;
+}
+.addFav {
+ width: 100%;
 }
 </style>
